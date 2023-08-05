@@ -10,11 +10,10 @@ export default function Home() {
     const history = useRouter();
     let token:any = 1;
     if (typeof window !== "undefined") {
-        token = localStorage.getItem("token");
-    }
-
-    if (token !== 1) {
-        history.replace("/register");
+        token = localStorage.getItem("token") ? localStorage.getItem("token") : ""
+        if (token === 1 || !token.length) {
+            history.replace("/register");
+        }
     }
     return (
         <>
