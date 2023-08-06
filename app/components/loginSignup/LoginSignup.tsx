@@ -80,14 +80,13 @@ const LoginSignup = (props: any) => {
                 .then(async (res) => {
                     setIsLoading(false);
                     const response = await res.json();
+                    if (!response.body.token) throw new Error()
                     localStorage.setItem("token", response.body.token);
                     props.push("/admin");
                 })
                 .catch((err) => {
-                    if (err.response.status === 401) {
                         alert("Invalid Credentials");
                         setIsLoading(false);
-                    }
                 });
         } else {
             const check = passwordCheck(password, confirmPassword);
